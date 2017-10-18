@@ -1,0 +1,37 @@
+let s:is_windows = has('win32') || has('win64')
+let s:is_cygwin = has('win32unix')
+
+function! s:is_mac()
+  return !s:is_windows && !s:is_cygwin
+        \ && (has('mac') || has('macunix') || has('gui_macvim') ||
+        \   (!executable('xdg-open') &&
+        \     system('uname') =~? '^darwin'))
+endfunction
+
+function! s:emulate_RETURN_KEY()
+  if s:is_mac()
+    return 'osascript -e ''tell application "System Events" to keystroke "M" using {control down}'''
+  endif
+endfunction
+
+Describe show-controllers
+  Before all
+    let V = vital#of('vital')
+    let PowerAssert = V.import('Vim.PowerAssert')
+    let s:assert = PowerAssert.assert
+  End
+
+  Before each
+    redir => current_path | pwd | redir END
+    let plugin_path = substitute(current_path, "\n", '', 'g')
+    let s:app_path = plugin_path . '/test/fixture/dummy'
+    let g:fzy_options = '-q sample1 ' . '& ' . s:emulate_RETURN_KEY()
+  End
+
+  It is-expected-to-success
+    execute('cd ' . s:app_path)
+    call fzy#rails#controllers()
+    let bufname = bufname("#")
+    execute s:assert('bufname ==# "app/controllers/sample1_controller.rb"')
+  End
+End

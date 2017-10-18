@@ -16,7 +16,8 @@ function! s:get_output(command)
   let l:fzy = s:cmd()
   try
     let output = system(a:command . l:fzy)
-  catch /Vim:Interrupt/
+  catch /Vim:Interrupt/ => e
+    echoerr e
   endtry
   redraw!
   return substitute(output, "\n", '', 'g')
@@ -31,12 +32,17 @@ function! s:base(command, Callback)
 endfunction
 
 function! s:get_application_root_path()
-  let response = system('git rev-parse --show-toplevel')
-  if !v:shell_error
-    return substitute(response,  "\n",  '',  'g')
-  else
-    return getcwd()
-  endif
+  let l:path = s:get_current_path()
+  let l:target = l:path
+  let l:i = 0
+  while l:i < len(split(l:path, '/'))
+    if findfile('Gemfile', l:target) !=# ''
+      return l:target
+    endif
+    let l:target = substitute(l:target, "/[A-Za-z-_:.]*$", '', '')
+    let l:i += 1
+  endwhile
+  throw 'Cant find rails project'
 endfunction
 
 function! s:get_current_path()
@@ -46,6 +52,7 @@ endfunction
 
 function! s:edit(file, path)
   let l:app_path = s:get_application_root_path()
+  echomsg l:app_path
   let l:target = l:app_path . a:path . '/' . a:file
   execute 'edit ' . l:target
 endfunction
@@ -54,14 +61,14 @@ function! fzy#rails#base#call(path)
   let l:current_path = s:get_current_path()
   let l:app_path = s:get_application_root_path()
   let l:Callback = { file -> s:edit(file, a:path) }
+  let l:cmd = 'find . -type f | cut -c 3-'
 
   try
     execute 'cd ' . l:app_path . a:path
-    call s:base('find . -type f | cut -c 3-', l:Callback)
+    call s:base(l:cmd, l:Callback)
   catch => e
-    echomsg e
+    echoerr e
   endtry
-
   execute 'cd ' . l:current_path
 endfunction
 

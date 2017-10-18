@@ -1,7 +1,7 @@
-set runtimepath+=./vim_modules/vital.vim
-set runtimepath+=./vim_modules/vital-vimlcompiler
-set runtimepath+=./vim_modules/vital-safe-string
-set runtimepath+=./vim_modules/vital-power-assert
+packadd! vital.vim
+packadd! vital-vimlcompiler
+packadd! vital-safe-string
+packadd! vital-power-assert
 
 let g:__vital_power_assert_config = {
     \  '__debug__': 1,
