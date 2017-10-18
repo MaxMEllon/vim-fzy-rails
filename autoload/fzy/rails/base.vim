@@ -9,6 +9,9 @@ set cpo&vim
 let s:fzy_options = get(g:, 'fzy_options', '-l 30')
 
 function s:cmd()
+  if $VIM_FZY_RAILS_TEST ==# '1'
+    return ' | head -n 1'
+  endif
   return ' | fzy ' . s:fzy_options
 endfunction
 

@@ -9,14 +9,14 @@ Describe The-selection-controllers-by-fzy
     redir => current_path | pwd | redir END
     let s:plugin_path = substitute(current_path, "\n", '', 'g')
     let s:app_path = s:plugin_path . '/test/fixture/dummy'
-    let g:fzy_options = '-q sample1 '  . Emulate_RETURN_KEY()
+    let g:fzy_options = Emulate_RETURN_KEY()
   End
 
   It is-expected-to-success.
     execute('cd ' . s:app_path)
     call fzy#rails#controllers()
     let bufname = bufname("$")
-    execute s:assert('bufname ==# "app/controllers/sample1_controller.rb"')
+    execute s:assert('bufname ==# "app/controllers/application_controller.rb"')
   End
 
   After each

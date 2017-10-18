@@ -16,7 +16,7 @@ Describe The-selection-models-by-fzy
     execute('cd ' . s:app_path)
     call fzy#rails#models()
     let bufname = bufname("$")
-    execute s:assert('bufname ==# "app/models/sample1.rb"')
+    execute s:assert('bufname ==# "app/models/application_record.rb"')
   End
 
   After each
