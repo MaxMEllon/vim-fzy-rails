@@ -1,7 +1,4 @@
 dependencies:
-  cache_directories:
-    - "~/vim-themis"
-    - "~/.vim/pack"
   override:
     - sudo apt-get install xautomation xdotool
     - sudo apt-get install build-essential ncurses-dev
