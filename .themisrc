@@ -1,0 +1,11 @@
+set runtimepath+=./vim_modules/vital.vim
+set runtimepath+=./vim_modules/vital-vimlcompiler
+set runtimepath+=./vim_modules/vital-safe-string
+set runtimepath+=./vim_modules/vital-power-assert
+
+let g:__vital_power_assert_config = {
+    \  '__debug__': 1,
+    \  '__pseudo_throw__': 0
+    \}
+
+" vim: ft=vim
