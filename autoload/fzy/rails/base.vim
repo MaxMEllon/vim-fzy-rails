@@ -52,7 +52,6 @@ endfunction
 
 function! s:edit(file, path)
   let l:app_path = s:get_application_root_path()
-  echomsg l:app_path
   let l:target = l:app_path . a:path . '/' . a:file
   execute 'edit ' . l:target
 endfunction
