@@ -10,8 +10,9 @@ endfunction
 
 function! Emulate_RETURN_KEY()
   if IsMac()
-    return 'osascript -e ''tell application "System Events" to keystroke "M" using {control down}'''
+    return '& osascript -e ''tell application "System Events" to keystroke "M" using {control down}'''
   else
-    return 'xte ''keydown Return'''
+    " FIXME: Emulate key press event
+    return '& sleep 1 && xdotool key Return'
   endif
 endfunction
