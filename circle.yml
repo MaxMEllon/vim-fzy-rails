@@ -4,6 +4,7 @@ dependencies:
     - "~/.vim/pack"
   override:
     - sudo apt-get install xautomation xdotool
+    - sudo apt-get install build-essential ncurses-dev
     - git clone https://github.com/thinca/vim-themis --quiet --branch v1.5.3 --single-branch --depth 1 ~/vim-themis
     - git clone https://github.com/vim-jp/vital.vim --depth 1 ~/pack/test/opt/vital.vim
     - git clone https://github.com/haya14busa/vital-vimlcompiler --depth 1 ~/.vim/pack/test/opt/vital-vimlcompiler
@@ -11,6 +12,8 @@ dependencies:
     - git clone https://github.com/haya14busa/vital-power-assert --depth 1 ~/.vim/pack/test/opt/vital-power-assert
     - wget https://github.com/jhawthorn/fzy/releases/download/0.9/fzy_0.9-1_amd64.deb
     - sudo dpkg -i fzy_0.9-1_amd64.deb
+    - sudo git clone https://github.com/vim/vim ~/vim
+    - cd ~/vim && ./configure --with-features=huge --enable-multibyte && make -j4 && sudo make install
 test:
   pre:
     - vim --version
