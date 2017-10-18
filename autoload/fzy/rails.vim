@@ -23,7 +23,19 @@ function! fzy#rails#serializers()
 endfunction
 
 function! fzy#rails#decorators()
-  call fzy#rails#base#call('/app/serializers')
+  call fzy#rails#base#call('/app/decorators')
+endfunction
+
+function! fzy#rails#packs()
+  call fzy#rails#base#call('/app/javascript/packs')
+endfunction
+
+function! fzy#rails#javascripts()
+  call fzy#rails#base#call('/app/assets/javascripts')
+endfunction
+
+function! fzy#rails#stylesheets()
+  call fzy#rails#base#call('/app/assets/stylesheets')
 endfunction
 
 let &cpo = s:save_cpo

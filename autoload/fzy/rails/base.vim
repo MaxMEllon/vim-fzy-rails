@@ -6,9 +6,16 @@ scriptencoding utf-8
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:fzy_options = get(g:, 'fzy_options', '-l 30')
+
+function s:cmd()
+  return ' | fzy ' . s:fzy_options
+endfunction
+
 function! s:get_output(command)
+  let l:fzy = s:cmd()
   try
-    let output = system(a:command . ' | fzy')
+    let output = system(a:command . l:fzy)
   catch /Vim:Interrupt/
   endtry
   redraw!
