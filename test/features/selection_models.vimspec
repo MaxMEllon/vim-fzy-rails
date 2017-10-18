@@ -1,0 +1,27 @@
+Describe The-selection-models-by-fzy
+  Before all
+    let V = vital#of('vital')
+    let PowerAssert = V.import('Vim.PowerAssert')
+    let s:assert = PowerAssert.assert
+  End
+
+  Before each
+    redir => current_path | pwd | redir END
+    let s:plugin_path = substitute(current_path, "\n", '', 'g')
+    let s:app_path = s:plugin_path . '/test/fixture/dummy'
+    let g:fzy_options = '-q sample1 ' . '& ' . Emulate_RETURN_KEY()
+  End
+
+  It is-expected-to-success.
+    execute('cd ' . s:app_path)
+    call fzy#rails#models()
+    let bufname = bufname("$")
+    execute s:assert('bufname ==# "app/models/sample1.rb"')
+  End
+
+  After each
+    execute('cd ' . s:plugin_path)
+  End
+End
+
+" vim: ft=vim

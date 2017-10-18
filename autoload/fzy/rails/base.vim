@@ -68,6 +68,7 @@ function! fzy#rails#base#call(path)
   catch => e
     echoerr e
   endtry
+
   execute 'cd ' . l:current_path
 endfunction
 

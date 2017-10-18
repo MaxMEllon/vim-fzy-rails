@@ -3,6 +3,8 @@ packadd! vital-vimlcompiler
 packadd! vital-safe-string
 packadd! vital-power-assert
 
+source ./test/support/spec_helper.vim
+
 let g:__vital_power_assert_config = {
     \  '__debug__': 1,
     \  '__pseudo_throw__': 0
