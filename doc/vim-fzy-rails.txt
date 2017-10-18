@@ -1,0 +1,14 @@
+*vim-fzy-rails*                Find file on rails project by fzy with in vim.
+
+Version 0.1.0
+Author: MaxMEllon <maxmellon1994@gmail.com>
+Support: Vim 8.0.0039 or above
+License: MIT License
+
+
+=============================================================================
+
+
+
+=============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
