@@ -45,7 +45,7 @@ nmap ,rse <Plug>(vim-fzy-rails_serializers)
 Following you write next config, if you want to find a services layer `(ex. /app/services)`.
 
 ```vim
-nmap ,rv :<C-u>call fzy#rails#base#call('/app/sercices')
+nmap ,rv :<C-u>call fzy#rails#base#call('/app/services')<CR>
 ```
 
 You able to correspond original special layer using the `fzy#rails#base#call()` function.

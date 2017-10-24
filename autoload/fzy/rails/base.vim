@@ -42,7 +42,7 @@ function! s:get_application_root_path()
     if findfile('Gemfile', l:target) !=# ''
       return l:target
     endif
-    let l:target = substitute(l:target, "/[A-Za-z-_:.]*$", '', '')
+    let l:target = substitute(l:target, "/[A-Za-z-_:.{}, `()]*$", '', '')
     let l:i += 1
   endwhile
   throw 'Cant find rails project'
@@ -63,7 +63,7 @@ function! fzy#rails#base#call(path)
   let l:current_path = s:get_current_path()
   let l:app_path = s:get_application_root_path()
   let l:Callback = { file -> s:edit(file, a:path) }
-  let l:cmd = 'find . -type f | cut -c 3-'
+  let l:cmd = 'find . -type f | cut -c 3- | sort'
 
   try
     execute 'cd ' . l:app_path . a:path
